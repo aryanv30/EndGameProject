@@ -102,6 +102,12 @@
         .checkout-btn:hover {
             background-color: #f85149;
         }
+		 .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            color: #b3b3b3;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +118,24 @@
         <h2>Cart</h2>
         <div id="cart-items"></div>
         <h3>Total: ₹<span id="total-price">0.00</span></h3>
-        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+		</div>
+		<div class="cart_pay" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
+		<img src="UPI.jpg" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; margin: 10px 0;">
+        <button class="checkout-btn" onclick="showCustomizationForm()" style="margin-top: 20px;">Pay and customise</button>
+		</div>
+    
+    <div id="customization-form" style="display: none; padding: 20px; background-color: #161b22; border-radius: 8px; margin: 20px auto; width: 90%;">
+        <h2>Customization & Order Details</h2>
+        <label>Name: <input type="text" id="cust-name" required></label><br>
+        <label>Phone: <input type="text" id="cust-phone" required></label><br>
+        <label>Email: <input type="email" id="cust-email" required></label><br>
+        <label>Payment Screenshot: <input type="file" id="cust-payment" required></label><br>
+        <h3>Customize Your Products</h3>
+        <div id="custom-table"></div>
+        <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+    
+    <div class="footer">Made with ❤️ by Aryan Varshney</div>
     </div>
     <script>
         const products = [
@@ -164,6 +187,39 @@
         }
         
         renderProducts();
+		 function showCustomizationForm() {
+            document.getElementById('customization-form').style.display = 'block';
+            generateCustomizationTable();
+        }
+
+        function generateCustomizationTable() {
+            const table = document.getElementById('custom-table');
+            table.innerHTML = '';
+            products.filter(p => p.quantity > 0).forEach(product => {
+                for (let i = 0; i < product.quantity; i++) {
+                    table.innerHTML += `
+                        <label>${product.name} (Item ${i + 1}): 
+                            <select>
+                                <option value="image">Image</option>
+                                <option value="pdf">PDF</option>
+                                <option value="text">Text</option>
+                            </select>
+                            <input type="file" required>
+                        </label><br>`;
+                }
+            });
+        }
+
+        function placeOrder() {
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const email = document.getElementById('cust-email').value;
+            if (!name || !phone || !email) {
+                alert("Please fill all mandatory fields.");
+                return;
+            }
+            alert("Order placed successfully!");
+        }
     </script>
 </body>
 </html>
