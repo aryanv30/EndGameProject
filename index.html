@@ -5,147 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EndGameProject</title>
     <style>
-        body {
-            background-color: #0d1117;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+ body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
         }
         .header {
             text-align: center;
             padding: 20px;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            color: #58a6ff;
+            color: #ff8c00;
+            background: linear-gradient(90deg, #ff8c00, #ff3d00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .banner {
             width: 100%;
-            height: 200px;
-            max-height: 300px;
+            height: 250px;
             background: url("banner.jpg") no-repeat center center/cover;
+            border-bottom: 3px solid #ff8c00;
         }
         .container {
             width: 90%;
             margin: 20px auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
         .product {
-            background-color: #161b22;
-            padding: 15px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #1e1e1e, #252525);
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            transition: transform 0.2s, background-color 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0px 4px 10px rgba(255, 140, 0, 0.2);
         }
         .product:hover {
-            transform: scale(1.05);
-            background-color: #21262d;
+            transform: scale(1.07);
+            box-shadow: 0px 6px 15px rgba(255, 140, 0, 0.5);
         }
         .product img {
-            height: 200px;
-            width: (height*3)/4;
+            height: 220px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 8px;
             background-color: #30363d;
         }
         .product h2 {
-            font-size: 18px;
-            margin: 10px 0 5px;
-            color: #58a6ff;
+            font-size: 20px;
+            margin: 10px 0;
+            color: #ff8c00;
         }
         .product p {
-            font-size: 16px;
-            color: #b3b3b3;
+            font-size: 18px;
+            color: #ffcc80;
         }
         .product button {
             margin: 5px;
-            padding: 5px 10px;
+            padding: 8px 15px;
             border: none;
-            border-radius: 5px;
-            background-color: #238636;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #ff3d00, #ff8c00);
             color: white;
             cursor: pointer;
-            transition: background-color 0.2s;
+            font-weight: bold;
+            transition: background 0.3s;
         }
         .product button:hover {
-            background-color: #2ea043;
+            background: linear-gradient(90deg, #ff8c00, #ff3d00);
         }
         .cart {
             margin: 20px auto;
             width: 90%;
             padding: 20px;
-            background-color: #161b22;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: center;
         }
         .cart h2 {
-            color: #58a6ff;
+            color: #ff8c00;
         }
         .cart-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #30363d;
+            padding: 12px;
+            border-bottom: 1px solid #ff8c00;
         }
         .checkout-btn {
             margin-top: 10px;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 5px;
-            background-color: #f78166;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #d32f2f, #ff3d00);
             color: white;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.3s;
         }
         .checkout-btn:hover {
-            background-color: #f85149;
+            background: linear-gradient(90deg, #ff3d00, #d32f2f);
         }
         .footer {
             text-align: center;
-            padding: 10px;
-            font-size: 14px;
-            color: #b3b3b3;
+            padding: 12px;
+            font-size: 16px;
+            color: #ffcc80;
         }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="file"] {
-            background: transparent;
-            border: 1px solid #30363d;
-            color: white;
-            padding: 8px;
-            border-radius: 4px;
-            outline: none;
-        }
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        input[type="file"]:focus {
-            border-color: #58a6ff;
-        }
-		 #customization-form {
+		#customization-form {
             display: none;
             padding: 20px;
-            background-color: #161b22;
             border-radius: 8px;
             margin: 20px auto;
-            width: 50%;
+            width: 100%;
             text-align: center;
         }
         #customization-form label {
             display: block;
             margin: 10px 0;
+            color: black;
         }
         input[type="text"],
         input[type="email"],
         input[type="tel"],
         input[type="file"],
         textarea {
-            background: #0d1117;
             border: 1px solid #30363d;
-            color: white;
+            color: black;
             padding: 10px;
             border-radius: 4px;
             outline: none;
@@ -171,13 +157,16 @@
     </div>
     
     <div id="customization-form">
-        <h2>Customization & Order Details</h2>
+        <h2>Order Details</h2>
         <label><input type="text" id="cust-name" placeholder="Name" required></label>
         <label><input type="tel" id="cust-phone" placeholder="Phone" required></label>
         <label><input type="email" id="cust-email" placeholder="Email" required></label>
         <label><input type="text" id="cust-institute" placeholder="Institute Name" required></label>
         <label><textarea id="cust-address" placeholder="Delivery Address" required rows="3"></textarea></label>
+		<h5>Upload Payment Screenshot</h5>
         <label><input type="file" id="cust-payment" required></label>
+		<h3>Customize Your Products</h3>
+		<div id="custom-table"></div>
         <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
     </div>
     
@@ -185,9 +174,10 @@
 
     <script>
         const products = [
-            { name: "Poster", price: 49.00, imageLink: "poster.jpg", id: 1, quantity: 0 },
-            { name: "Led Board", price: 799.00, imageLink: "ledboard.jpg", id: 2, quantity: 0 },
-            { name: "Keychain", price: 99.00, imageLink: "keychain.jpg", id: 3, quantity: 0 }
+            { name: "Name Tag", price: 149.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
+			{ name: "Door Plate", price: 49.00, imageLink: "doorplate.jpg", id: 2, quantity: 0 },
+			{ name: "Poster A3", price: 59.00, imageLink: "nametag.jpg", id: 3, quantity: 0 },
+			{ name: "Poster A4", price: 49.00, imageLink: "nametag.jpg", id: 4, quantity: 0 }
         ];
 
         function renderProducts() {
@@ -236,14 +226,18 @@
         function generateCustomizationTable() {
             const table = document.getElementById('custom-table');
             table.innerHTML = '';
+			//use customization inst. for diff prd
             products.filter(p => p.quantity > 0).forEach(product => {
                 for (let i = 0; i < product.quantity; i++) {
+					let productLabel = `${product.name} ${i + 1}`;
                     table.innerHTML += `
-                        <label>${product.name}: 
-                            <input type="file" required>
-                        </label><br>`;
+                         <div style="margin-bottom: 10px;">
+                    <input type="text" placeholder="${productLabel}" required 
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>`;
                 }
             });
+			
         }
         
         function generateOrderId() {
