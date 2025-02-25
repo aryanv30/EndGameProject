@@ -165,12 +165,13 @@
         <label><textarea id="cust-address" placeholder="Delivery Address" required rows="3"></textarea></label>
 		<h5>Upload Payment Screenshot</h5>
         <label><input type="file" id="cust-payment" required></label>
+		<hr style="border: 1px solid #ff3d00; margin: 20px 0;">
 		<h3>Customize Your Products</h3>
 		<div id="custom-table"></div>
         <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
     </div>
     
-    <div class="footer">Made with ❤️ by Aryan V.</div>
+    <div class="footer">Made with ❤️ by Cheetah Gang</div>
 
     <script>
         const products = [
@@ -231,9 +232,9 @@
                 for (let i = 0; i < product.quantity; i++) {
 					let productLabel = `${product.name} ${i + 1}`;
                     table.innerHTML += `
-                         <div style="margin-bottom: 10px;">
+                         <div style="margin-bottom: 10px; width"90%">
                     <input type="text" placeholder="${productLabel}" required 
-                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
                 </div>`;
                 }
             });
