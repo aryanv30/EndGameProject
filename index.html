@@ -251,8 +251,7 @@
                 totalPrice: totalPrice
             };
 
-            // Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with the actual URL of your deployed Google Apps Script
-            fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+            fetch('https://script.google.com/macros/s/AKfycbyGEtkqO2CVI7Ul69YXnH4pNQockIg1mI9fpqa0Uvm8eL3ElzgwNtDyVcZajRA3meySTw/exec', {
                 method: 'POST',
                 body: JSON.stringify(data)
             })
