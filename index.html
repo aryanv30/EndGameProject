@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CheetahGang.com</title>
+    <title>MarketingManagement2</title>
     <style>
         body {
             background-color: #0d1117;
@@ -108,10 +108,28 @@
             font-size: 14px;
             color: #b3b3b3;
         }
+		        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"] {
+            background: transparent;
+            border: 1px solid #30363d;
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="file"]:focus {
+            border-color: #58a6ff;
+        }
     </style>
 </head>
 <body>
-    <div class="header">CheetahGang.com</div>
+    <div class="header">End Game Project</div>
     <div class="banner"></div>
     <div class="container" id="product-list"></div>
     <div class="cart">
@@ -124,18 +142,18 @@
         <button class="checkout-btn" onclick="showCustomizationForm()" style="margin-top: 20px;">Pay and customise</button>
 		</div>
     
-    <div id="customization-form" style="display: none; padding: 20px; background-color: #161b22; border-radius: 8px; margin: 20px auto; width: 90%;">
+    <div id="customization-form" style="display: none; padding: 20px; background-color: #161b22; border-radius: 8px; margin: 20px auto; width: 90%; text-align: center;">
         <h2>Customization & Order Details</h2>
-        <label>Name: <input type="text" id="cust-name" required></label><br>
+        <label> Name: <input type="text" id="cust-name" required></label><br>
         <label>Phone: <input type="text" id="cust-phone" required></label><br>
-        <label>Email: <input type="email" id="cust-email" required></label><br>
+        <label>  Email: <input type="email" id="cust-email" required></label><br>
         <label>Payment Screenshot: <input type="file" id="cust-payment" required></label><br>
         <h3>Customize Your Products</h3>
         <div id="custom-table"></div>
         <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
     </div>
     
-    <div class="footer">Made with ❤️ by Aryan Varshney</div>
+    <div class="footer">Made with ❤️ by Aryan V.</div>
     </div>
     <script>
         const products = [
@@ -198,12 +216,7 @@
             products.filter(p => p.quantity > 0).forEach(product => {
                 for (let i = 0; i < product.quantity; i++) {
                     table.innerHTML += `
-                        <label>${product.name} (Item ${i + 1}): 
-                            <select>
-                                <option value="image">Image</option>
-                                <option value="pdf">PDF</option>
-                                <option value="text">Text</option>
-                            </select>
+                        <label>${product.name}: 
                             <input type="file" required>
                         </label><br>`;
                 }
