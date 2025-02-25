@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketingManagement2</title>
+    <title>EndGameProject</title>
     <style>
         body {
             background-color: #0d1117;
@@ -125,11 +125,40 @@
         input[type="file"]:focus {
             border-color: #58a6ff;
         }
+		 #customization-form {
+            display: none;
+            padding: 20px;
+            background-color: #161b22;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 50%;
+            text-align: center;
+        }
+        #customization-form label {
+            display: block;
+            margin: 10px 0;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"],
+        textarea {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            outline: none;
+            width: 90%;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            border-color: #58a6ff;
+        }
     </style>
 </head>
 <body>
-    <div class="header">ChutPagluPrints.com</div>
-    <div class="banner"></div>
+    <div class="header">Printastik</div>
     <div class="container" id="product-list"></div>
     <div class="cart">
         <h2>Cart</h2>
@@ -141,16 +170,14 @@
         <button class="checkout-btn" onclick="showCustomizationForm()" style="margin-top: 20px;">Pay and customise</button>
     </div>
     
-    <div id="customization-form" style="display: none; padding: 20px; background-color: #161b22; border-radius: 8px; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="customization-form">
         <h2>Customization & Order Details</h2>
-        <label>Name: <input type="text" id="cust-name" required></label>
-        <label>Phone: <input type="tel" id="cust-phone" required></label>
-        <label>Email: <input type="email" id="cust-email" required></label>
-        <label>Institute Name: <input type="text" id="cust-institute" required></label>
-        <label>Delivery Address: <textarea id="cust-address" required rows="3"></textarea></label>
-        <label>Payment Screenshot: <input type="file" id="cust-payment" required></label>
-       <h3>Customize Your Products</h3>
-        <div id="custom-table"></div>
+        <label><input type="text" id="cust-name" placeholder="Name" required></label>
+        <label><input type="tel" id="cust-phone" placeholder="Phone" required></label>
+        <label><input type="email" id="cust-email" placeholder="Email" required></label>
+        <label><input type="text" id="cust-institute" placeholder="Institute Name" required></label>
+        <label><textarea id="cust-address" placeholder="Delivery Address" required rows="3"></textarea></label>
+        <label><input type="file" id="cust-payment" required></label>
         <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
     </div>
     
