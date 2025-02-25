@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketingManagement2</title>
-	<script src="https://apis.google.com/js/api.js"></script>
+    <title>End Game Project</title>
     <style>
         body {
             background-color: #0d1117;
@@ -46,7 +45,7 @@
         }
         .product img {
             height: 200px;
-            width: (height*3)/4;
+            width: calc((height*3)/4);
             object-fit: cover;
             border-radius: 5px;
             background-color: #30363d;
@@ -103,13 +102,13 @@
         .checkout-btn:hover {
             background-color: #f85149;
         }
-		 .footer {
+        .footer {
             text-align: center;
             padding: 10px;
             font-size: 14px;
             color: #b3b3b3;
         }
-		        input[type="text"],
+        input[type="text"],
         input[type="email"],
         input[type="tel"],
         input[type="file"] {
@@ -120,7 +119,6 @@
             border-radius: 4px;
             outline: none;
         }
-
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="tel"]:focus,
@@ -129,7 +127,7 @@
         }
     </style>
 </head>
-<body onload="handleClientLoad()">
+<body>
     <div class="header">End Game Project</div>
     <div class="banner"></div>
     <div class="container" id="product-list"></div>
@@ -137,11 +135,11 @@
         <h2>Cart</h2>
         <div id="cart-items"></div>
         <h3>Total: ₹<span id="total-price">0.00</span></h3>
-		</div>
-		<div class="cart_pay" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
-		<img src="UPI.jpg" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; margin: 10px 0;">
+    </div>
+    <div class="cart_pay" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
+        <img src="UPI.jpg" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; margin: 10px 0;">
         <button class="checkout-btn" onclick="showCustomizationForm()" style="margin-top: 20px;">Pay and customise</button>
-		</div>
+    </div>
     
     <div id="customization-form" style="display: none; padding: 20px; background-color: #161b22; border-radius: 8px; margin: 20px auto; width: 90%; text-align: center;">
         <h2>Customization & Order Details</h2>
@@ -155,20 +153,19 @@
     </div>
     
     <div class="footer">Made with ❤️ by Aryan V.</div>
-    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
     <script>
-	
-		const SPREADSHEET_ID = '1qiONtqFtpnXErcoRtWKCkfwjRL1PLWfBOV2fPSO7mJw';
-		const CLIENT_ID = '515142545572-era6fmcnlilc9kefeiq13s03l5gjpgkb.apps.googleusercontent.com';
-		const API_KEY = 'AIzaSyDecmkHxqpDuk6g0h5Y4gofTBp7JqX8H0E';
-		const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
-		
-		function handleClientLoad() {
+        const SPREADSHEET_ID = '1qiONtqFtpnXErcoRtWKCkfwjRL1PLWfBOV2fPSO7mJw';
+        const CLIENT_ID = '515142545572-era6fmcnlilc9kefeiq13s03l5gjpgkb.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyDecmkHxqpDuk6g0h5Y4gofTBp7JqX8H0E';
+        const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+
+        function handleClientLoad() {
             gapi.load('client:auth2', initClient);
         }
-		
-				
-		function initClient() {
+
+        function initClient() {
             gapi.client.init({
                 apiKey: API_KEY,
                 clientId: CLIENT_ID,
@@ -185,7 +182,7 @@
                 gapi.auth2.getAuthInstance().signIn();
             }
         }
-		
+
         const products = [
             { name: "Poster", price: 49.00, imageLink: "poster.jpg", id: 1, quantity: 0 },
             { name: "Led Board", price: 799.00, imageLink: "ledboard.jpg", id: 2, quantity: 0 },
@@ -230,12 +227,7 @@
             document.getElementById('total-price').textContent = total.toFixed(2);
         }
         
-        function checkout() {
-            alert("Proceeding to checkout. Total: ₹" + document.getElementById('total-price').textContent);
-        }
-        
-        renderProducts();
-		 function showCustomizationForm() {
+        function showCustomizationForm() {
             document.getElementById('customization-form').style.display = 'block';
             generateCustomizationTable();
         }
@@ -252,8 +244,8 @@
                 }
             });
         }
-		
-		function generateOrderId() {
+        
+        function generateOrderId() {
             const now = new Date();
             const dd = String(now.getDate()).padStart(2, '0');
             const mm = String(now.getMonth() + 1).padStart(2, '0');
@@ -263,48 +255,57 @@
             const ss = String(now.getSeconds()).padStart(2, '0');
             return `${dd}${mm}${yyyy}${hh}${mi}${ss}`;
         }
-		 
-		function placeOrder() {
-    const name = document.getElementById('cust-name').value;
-    const phone = document.getElementById('cust-phone').value;
-    const email = document.getElementById('cust-email').value;
+         
+        function placeOrder() {
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const email = document.getElementById('cust-email').value;
 
-    if (!name || !phone || !email) {
-        alert("Please fill all mandatory fields.");
-        return;
-    }
+            if (!name || !phone || !email) {
+                alert("Please fill all mandatory fields.");
+                return;
+            }
 
-    const orderId = generateOrderId();
+            const orderId = generateOrderId();
 
-    if (!gapi.client || !gapi.client.sheets) {
-        console.error("Google API client not initialized yet!");
-        return;
-    }
+            if (!gapi.client || !gapi.client.sheets) {
+                console.error("Google API client not initialized yet!");
+                return;
+            }
 
-    const params = {
-        spreadsheetId: SPREADSHEET_ID, // Your Google Sheet ID
-        range: 'Sheet1',
-        valueInputOption: 'RAW',
-        insertDataOption: 'INSERT_ROWS',
-    };
+            const params = {
+                spreadsheetId: SPREADSHEET_ID,
+                range: 'Sheet1',
+                valueInputOption: 'RAW',
+                insertDataOption: 'INSERT_ROWS',
+            };
 
-    const valueRangeBody = {
-        majorDimension: 'ROWS', 
-        values: [[orderId, name, phone, email]], // Now saving all fields
-    };
+            const valueRangeBody = {
+                majorDimension: 'ROWS', 
+                values: [[orderId, name, phone, email]],
+            };
 
-    gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody).then(
-        function(response) {
-            console.log('Success:', response);
-            alert('Data submitted successfully!');
-        },
-        function(error) {
-            console.error('Error:', error.result.error.message);
+            gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody).then(
+                function(response) {
+                    console.log('Success:', response);
+                    alert('Data submitted successfully!');
+                },
+                function(error) {
+                    console.error('Error:', error.result.error.message);
+                }
+            );
+        
+            alert("Order placed successfully! Order ID: " + orderId);
         }
-    );
-	
-	alert("Order placed successfully! Order ID: " + orderId);
-}
+
+        // Initialize the application
+        function init() {
+            renderProducts();
+            handleClientLoad();
+        }
+
+        // Call init when the window loads
+        window.onload = init;
     </script>
 </body>
 </html>
