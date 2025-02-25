@@ -143,11 +143,13 @@
     
     <div id="customization-form" style="display: none; padding: 20px; background-color: #161b22; border-radius: 8px; margin: 20px auto; width: 90%; text-align: center;">
         <h2>Customization & Order Details</h2>
-        <label> Name: <input type="text" id="cust-name" required></label><br>
-        <label>Phone: <input type="tel" id="cust-phone" required></label><br>
-        <label>  Email: <input type="email" id="cust-email" required></label><br>
-        <label>Payment Screenshot: <input type="file" id="cust-payment" required></label><br>
-        <h3>Customize Your Products</h3>
+        <label>Name: <input type="text" id="cust-name" required></label>
+        <label>Phone: <input type="tel" id="cust-phone" required></label>
+        <label>Email: <input type="email" id="cust-email" required></label>
+        <label>Institute Name: <input type="text" id="cust-institute" required></label>
+        <label>Delivery Address: <textarea id="cust-address" required rows="3"></textarea></label>
+        <label>Payment Screenshot: <input type="file" id="cust-payment" required></label>
+       <h3>Customize Your Products</h3>
         <div id="custom-table"></div>
         <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
     </div>
@@ -232,9 +234,12 @@
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
             const email = document.getElementById('cust-email').value;
+            const institute = document.getElementById('cust-institute').value;
+            const address = document.getElementById('cust-address').value;
+            const paymentScreenshot = document.getElementById('cust-payment').value;
 
-            if (!name || !phone || !email) {
-                alert("Please fill all mandatory fields.");
+            if (!name || !phone || !email || !institute || !address || !paymentScreenshot) {
+                alert("Please fill all mandatory fields and upload the payment screenshot.");
                 return;
             }
 
@@ -247,6 +252,8 @@
                 name: name,
                 phone: phone,
                 email: email,
+				institute: institute,
+				address: address,
                 cartItems: cartItems,
                 totalPrice: totalPrice
             };
