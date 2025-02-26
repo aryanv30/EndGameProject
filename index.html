@@ -151,10 +151,10 @@
         <div id="cart-items"></div>
         <h3>Total: ₹<span id="total-price">0.00</span></h3>
     </div>
-    <div class="cart_pay" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
+    <center><div class="cart_pay" style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
         <img src="UPI.jpg" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; margin: 10px 0;">
         <button class="checkout-btn" onclick="showCustomizationForm()" style="margin-top: 20px;">Pay and customise</button>
-    </div>
+    </div></center>
     
     <div id="customization-form">
         <h2>Order Details</h2>
@@ -250,11 +250,11 @@
 			for (let i = 0; i < product.quantity; i++) {
 				let productLabel = `${product.name} ${i + 1}: ${prdDes}`;
 				table.innerHTML += `
-					<div style="margin-bottom: 10px; width: 90%">
+					<center><div style="margin-bottom: 10px; width: 90%">
 						<input type="text" placeholder="${productLabel}" required 
-							style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
+							style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
 							id="custom-${product.id}-${i}">
-					</div>`;
+					</div></center>`;
 			}
 			});
 		}
