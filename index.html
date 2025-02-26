@@ -227,10 +227,24 @@
         function generateCustomizationTable() {
             const table = document.getElementById('custom-table');
             table.innerHTML = '';
-			//use customization inst. for diff prd
             products.filter(p => p.quantity > 0).forEach(product => {
+				prdDes = " ";
+				switch(product.id){
+					case 1:
+						prdDes = "Enter your Name, Roll Number";
+						break;
+					case 2:
+						prdDes = "Enter Name, Room Number";
+						break;
+					case 3:
+						prdDes = "Enter design number from catalog";
+						break;
+					case 4:
+						prdDes = "Enter design number from catalog";
+						break;
+			}
                 for (let i = 0; i < product.quantity; i++) {
-					let productLabel = `${product.name} ${i + 1}`;
+					let productLabel = `${product.name} ${i + 1}: ${prdDes}`;
                     table.innerHTML += `
                          <div style="margin-bottom: 10px; width"90%">
                     <input type="text" placeholder="${productLabel}" required 
