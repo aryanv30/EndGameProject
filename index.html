@@ -177,25 +177,29 @@
         const products = [
             { name: "Name Tag", price: 149.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
 			{ name: "Door Plate", price: 49.00, imageLink: "doorplate.jpg", id: 2, quantity: 0 },
-			{ name: "Poster A3", price: 59.00, imageLink: "nametag.jpg", id: 3, quantity: 0 },
-			{ name: "Poster A4", price: 49.00, imageLink: "nametag.jpg", id: 4, quantity: 0 }
+			{ name: "Poster A3", price: 59.00, imageLink: "poster.jpg", id: 3, quantity: 0 },
+			{ name: "Poster A4", price: 49.00, imageLink: "poster.jpg", id: 4, quantity: 0 }
         ];
 
-        function renderProducts() {
-            const productList = document.getElementById('product-list');
-            productList.innerHTML = '';
-            products.forEach(product => {
-                productList.innerHTML += `
-                    <div class="product">
-                        <img src="${product.imageLink}" alt="${product.name}">
-                        <h2>${product.name}</h2>
-                        <p>₹${product.price.toFixed(2)}</p>
-                        <button onclick="updateCart(${product.id}, -1)">-</button>
-                        <span id="qty-${product.id}">0</span>
-                        <button onclick="updateCart(${product.id}, 1)">+</button>
-                    </div>`;
-            });
-        }
+	function renderProducts() {
+		const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+    products.forEach(product => {
+        const imageElement = (product.id === 3 || product.id === 4) 
+            ? `<a href="https://drive.google.com/file/d/1ARiyCZNy6ZaEuCyNCXgGE5CYSlw-z_nG/view?usp=drive_link" target="_blank"><img src="${product.imageLink}" alt="${product.name}"></a>`
+            : `<img src="${product.imageLink}" alt="${product.name}">`;
+
+        productList.innerHTML += `
+            <div class="product">
+                ${imageElement}
+                <h2>${product.name}</h2>
+                <p>₹${product.price.toFixed(2)}</p>
+                <button onclick="updateCart(${product.id}, -1)">-</button>
+                <span id="qty-${product.id}">0</span>
+                <button onclick="updateCart(${product.id}, 1)">+</button>
+            </div>`;
+    });
+	}
         
         function updateCart(productId, change) {
             const product = products.find(p => p.id === productId);
@@ -225,36 +229,36 @@
         }
 
         function generateCustomizationTable() {
-            const table = document.getElementById('custom-table');
-            table.innerHTML = '';
-            products.filter(p => p.quantity > 0).forEach(product => {
-				prdDes = " ";
-				switch(product.id){
-					case 1:
-						prdDes = "Enter your Name, Roll Number";
-						break;
-					case 2:
-						prdDes = "Enter Name, Room Number";
-						break;
-					case 3:
-						prdDes = "Enter design number from catalog";
-						break;
-					case 4:
-						prdDes = "Enter design number from catalog";
-						break;
+		const table = document.getElementById('custom-table');
+		table.innerHTML = '';
+		products.filter(p => p.quantity > 0).forEach(product => {
+			let prdDes = " ";
+			switch(product.id){
+				case 1:
+					prdDes = "Enter your Name, Roll Number";
+					break;
+				case 2:
+					prdDes = "Enter Name, Room Number";
+					break;
+				case 3:
+					prdDes = "Enter design number from catalog";
+					break;
+				case 4:
+					prdDes = "Enter design number from catalog";
+					break;
 			}
-                for (let i = 0; i < product.quantity; i++) {
-					let productLabel = `${product.name} ${i + 1}: ${prdDes}`;
-                    table.innerHTML += `
-                         <div style="margin-bottom: 10px; width"90%">
-                    <input type="text" placeholder="${productLabel}" required 
-                        style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-                </div>`;
-                }
-            });
-			
-        }
-        
+			for (let i = 0; i < product.quantity; i++) {
+				let productLabel = `${product.name} ${i + 1}: ${prdDes}`;
+				table.innerHTML += `
+					<div style="margin-bottom: 10px; width: 90%">
+						<input type="text" placeholder="${productLabel}" required 
+							style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
+							id="custom-${product.id}-${i}">
+					</div>`;
+			}
+			});
+		}
+
         function generateOrderId() {
             const now = new Date();
             const dd = String(now.getDate()).padStart(2, '0');
@@ -267,61 +271,73 @@
         }
          
         function placeOrder() {
-            const name = document.getElementById('cust-name').value;
-            const phone = document.getElementById('cust-phone').value;
-            const email = document.getElementById('cust-email').value;
-            const institute = document.getElementById('cust-institute').value;
-            const address = document.getElementById('cust-address').value;
-            const paymentScreenshot = document.getElementById('cust-payment').files[0];
+    const name = document.getElementById('cust-name').value;
+    const phone = document.getElementById('cust-phone').value;
+    const email = document.getElementById('cust-email').value;
+    const institute = document.getElementById('cust-institute').value;
+    const address = document.getElementById('cust-address').value;
+    const paymentScreenshot = document.getElementById('cust-payment').files[0];
 
-            if (!name || !phone || !email || !institute || !address || !paymentScreenshot) {
-                alert("Please fill all mandatory fields and upload the payment screenshot.");
-                return;
+    if (!name || !phone || !email || !institute || !address || !paymentScreenshot) {
+        alert("Please fill all mandatory fields and upload the payment screenshot.");
+        return;
+    }
+
+    const orderId = generateOrderId();
+    const cartItems = products.filter(p => p.quantity > 0).map(p => `${p.name} x${p.quantity}`).join(', ');
+    const totalPrice = document.getElementById('total-price').textContent;
+
+    const customizationData = [];
+    products.filter(p => p.quantity > 0).forEach(product => {
+        for (let i = 0; i < product.quantity; i++) {
+            const customInput = document.getElementById(`custom-${product.id}-${i}`);
+            if (customInput) {
+                customizationData.push(`${product.name} ${i + 1}: ${customInput.value}`);
             }
-
-            const orderId = generateOrderId();
-            const cartItems = products.filter(p => p.quantity > 0).map(p => `${p.name} x${p.quantity}`).join(', ');
-            const totalPrice = document.getElementById('total-price').textContent;
-			
-			const reader = new FileReader();
-			reader.onload = function(e) {
-			const base64Image = e.target.result.split(',')[1];
-			sendOrderData(orderId, name, phone, email, institute, address, cartItems, totalPrice, base64Image);
-			};
-			reader.readAsDataURL(paymentScreenshot);
-		}
-
-		function sendOrderData(orderId, name, phone, email, institute, address, cartItems, totalPrice, base64Image) {
-
-            const data = {
-                orderId: orderId,
-                name: name,
-                phone: phone,
-                email: email,
-				institute: institute,
-				address: address,
-                cartItems: cartItems,
-                totalPrice: totalPrice,
-				image: base64Image
-            };
-
-            fetch('https://script.google.com/macros/s/AKfycbxcZq2GqZ8c8a8z5WrUWJe1hQC3ADVLeHYyx_xy05-b3RFZLvioc2XH8qscP3-Rgyu9Wg/exec', {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(result => {
-                if (result === "Success") {
-                    alert("Order placed successfully! Order ID: " + orderId);
-                } else {
-                    alert("There was an error placing your order. Please try again.");
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("There was an error placing your order. Please try again.");
-            });
         }
+    });
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64Image = e.target.result.split(',')[1];
+        sendOrderData(orderId, name, phone, email, institute, address, cartItems, totalPrice, base64Image, customizationData);
+    };
+    reader.readAsDataURL(paymentScreenshot);
+}
+
+
+	function sendOrderData(orderId, name, phone, email, institute, address, cartItems, totalPrice, base64Image, customizationData) {
+    const data = {
+        orderId: orderId,
+        name: name,
+        phone: phone,
+        email: email,
+        institute: institute,
+        address: address,
+        cartItems: cartItems,
+        totalPrice: totalPrice,
+        image: base64Image,
+        customization: customizationData.join('; ')
+    };
+
+    fetch('https://script.google.com/macros/s/AKfycbyMOZpRYATBoLTYX-g4KcgXnwNTxo_zHH2YJFq7ToYfSa6EwldrfyCexuCc43rNeaImew/exec', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(result => {
+        if (result === "Success") {
+            alert("Order placed successfully! Order ID: " + orderId);
+        } else {
+            alert("There was an error placing your order. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error placing your order. Please try again.");
+    });
+}
+
 
         renderProducts();
     </script>
