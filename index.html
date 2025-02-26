@@ -328,6 +328,7 @@
     .then(result => {
         if (result === "Success") {
             alert("Order placed successfully! Order ID: " + orderId);
+            window.location.reload();
         } else {
             alert("There was an error placing your order. Please try again.");
         }
