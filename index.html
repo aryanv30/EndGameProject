@@ -175,10 +175,10 @@
 
     <script>
         const products = [
-            { name: "Name Tag", price: 149.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
-			{ name: "Door Plate", price: 49.00, imageLink: "doorplate.jpg", id: 2, quantity: 0 },
-			{ name: "Poster A3", price: 59.00, imageLink: "poster.jpg", id: 3, quantity: 0 },
-			{ name: "Poster A4", price: 49.00, imageLink: "poster.jpg", id: 4, quantity: 0 }
+            { name: "Name Tag", price: 100.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
+			//{ name: "Door Plate", price: 49.00, imageLink: "doorplate.jpg", id: 2, quantity: 0 },
+			//{ name: "Poster A3", price: 59.00, imageLink: "poster.jpg", id: 3, quantity: 0 },
+			//{ name: "Poster A4", price: 49.00, imageLink: "poster.jpg", id: 4, quantity: 0 }
         ];
 
 	function renderProducts() {
@@ -235,7 +235,7 @@
 			let prdDes = " ";
 			switch(product.id){
 				case 1:
-					prdDes = "Enter your Name, Roll Number";
+					prdDes = "Enter your Name";
 					break;
 				case 2:
 					prdDes = "Enter Name, Room Number";
