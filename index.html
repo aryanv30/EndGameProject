@@ -183,7 +183,7 @@
     <script>
         const products = [
             { name: "Name Tag", price: 99.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
-			//{ name: "Door Plate", price: 49.00, imageLink: "doorplate.jpg", id: 2, quantity: 0 },
+			{ name: "EcoGrip (Pre-Book)", price: 1.00, imageLink: "ecogrip.jpeg", id: 2, quantity: 0 },
 			//{ name: "Poster A3", price: 59.00, imageLink: "poster.jpg", id: 3, quantity: 0 },
 			//{ name: "Poster A4", price: 49.00, imageLink: "poster.jpg", id: 4, quantity: 0 }
         ];
@@ -194,7 +194,7 @@
     products.forEach(product => {
         const imageElement = (product.id === 3 || product.id === 4) 
             ? `<a href="https://drive.google.com/file/d/1ARiyCZNy6ZaEuCyNCXgGE5CYSlw-z_nG/view?usp=drive_link" target="_blank"><img src="${product.imageLink}" alt="${product.name}"></a>`
-            : `<img src="${product.imageLink}" alt="${product.name}">`;
+            : `<img src="${product.imageLink}" alt="${product.name}">`;	
 
         productList.innerHTML += `
             <div class="product">
