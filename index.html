@@ -182,21 +182,21 @@
 
     <script>
         const products = [
-            { name: "Name Tag", price: 99.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
-			{ name: "Door Tag", price: 29.00, imageLink: "doortag.png", id: 2, quantity: 0 },
 			{ name: "Ghibli Photos", price: 29.00, imageLink: "ghibli.jpg", id: 3, quantity: 0 },
-			{ name: "Poster A4", price: 59.00, imageLink: "poster.jpg", id: 4, quantity: 0 },
-			{ name: "Poster A3", price: 69.00, imageLink: "poster.jpg", id: 5, quantity: 0 },
-			{ name: "Poster A5", price: 49.00, imageLink: "poster.jpg", id: 6, quantity: 0 }
+			{ name: "Door Tag", price: 29.00, imageLink: "doortag.png", id: 2, quantity: 0 },
+			{ name: "Poster A4", price: 59.00, imageLink: "poster2.png", id: 4, quantity: 0 },
+			{ name: "Poster A3", price: 69.00, imageLink: "poster3.png", id: 5, quantity: 0 },
+			{ name: "Poster A5", price: 49.00, imageLink: "poster1.png", id: 6, quantity: 0 },
+            { name: "Name Tag", price: 99.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
+			{ name: "Sticker Pack", price: 99.00, imageLink: "sticker.png", id: 7, quantity: 0 },
+			{ name: "Surprise Item", price: 09.00, imageLink: "surprise.png", id: 8, quantity: 0 }
         ];
 
 	function renderProducts() {
 		const productList = document.getElementById('product-list');
     productList.innerHTML = '';
     products.forEach(product => {
-        const imageElement = (product.id === 3 || product.id === 4) 
-            ? `<a href="https://drive.google.com/file/d/1ARiyCZNy6ZaEuCyNCXgGE5CYSlw-z_nG/view?usp=drive_link" target="_blank"><img src="${product.imageLink}" alt="${product.name}"></a>`
-            : `<img src="${product.imageLink}" alt="${product.name}">`;	
+        const imageElement =`<img src="${product.imageLink}" alt="${product.name}">`;	
 
         productList.innerHTML += `
             <div class="product">
@@ -260,7 +260,7 @@
 					break;
 				case 6:
 					prdDes = "Drive link to your design";
-					break;	
+					break;
 			}
 			for (let i = 0; i < product.quantity; i++) {
 				let productLabel = `${product.name} ${i + 1}: ${prdDes}`;
