@@ -184,8 +184,10 @@
         const products = [
             { name: "Name Tag", price: 99.00, imageLink: "nametag.jpg", id: 1, quantity: 0 },
 			{ name: "Door Tag", price: 29.00, imageLink: "doortag.png", id: 2, quantity: 0 },
-			//{ name: "Poster A3", price: 59.00, imageLink: "poster.jpg", id: 3, quantity: 0 },
-			//{ name: "Poster A4", price: 49.00, imageLink: "poster.jpg", id: 4, quantity: 0 }
+			{ name: "Ghibli Photos", price: 29.00, imageLink: "ghibli.jpg", id: 3, quantity: 0 },
+			{ name: "Poster A4", price: 59.00, imageLink: "poster.jpg", id: 4, quantity: 0 },
+			{ name: "Poster A3", price: 69.00, imageLink: "poster.jpg", id: 5, quantity: 0 },
+			{ name: "Poster A5", price: 49.00, imageLink: "poster.jpg", id: 6, quantity: 0 }
         ];
 
 	function renderProducts() {
@@ -245,14 +247,20 @@
 					prdDes = "Enter your Name";
 					break;
 				case 2:
-					prdDes = "Enter Name, Room Number";
+					prdDes = "Enter Name, Room Number / Drive link to design";
 					break;
 				case 3:
-					prdDes = "Enter design number from catalog";
+					prdDes = "Drive link to your photo";
 					break;
 				case 4:
-					prdDes = "Enter design number from catalog";
+					prdDes = "Drive link to your design";
 					break;
+				case 5:
+					prdDes = "Drive link to your design";
+					break;
+				case 6:
+					prdDes = "Drive link to your design";
+					break;	
 			}
 			for (let i = 0; i < product.quantity; i++) {
 				let productLabel = `${product.name} ${i + 1}: ${prdDes}`;
